@@ -9,3 +9,4 @@ Semi/Semi_*.html
 *.iml
 __pycache__
 .ninja_*
+.build.ninja~
