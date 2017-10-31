@@ -186,9 +186,14 @@ def main():
     n.variable('outdir', 'build')
     n.variable('cp', 'cp')
     n.variable('inkscape', 'inkscape')
+    n.variable('tidy', 'tidy')
 
     n.rule('gen', ['./gen.py'])
     n.build('build.ninja', 'gen', './gen.py', variables={'generator': 1})
+
+    n.rule('tidy', '$tidy -indent -clean -q -output $out $in || [ $$? -ne 2 ]')
+    for volume in volumes():
+        n.build('$outdir/{}/index.html'.format(volume), 'tidy', '{}/index.html'.format(volume))
 
     images(n)
 
