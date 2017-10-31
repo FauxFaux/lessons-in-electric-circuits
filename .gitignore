@@ -10,3 +10,5 @@ Semi/Semi_*.html
 __pycache__
 .ninja_*
 .build.ninja~
+build/
+build.ninja

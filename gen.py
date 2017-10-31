@@ -3,7 +3,7 @@ import os
 import os.path
 import re
 import sys
-from typing import Iterable, Tuple, Iterator
+from typing import Iterable, Tuple, Iterator, Dict
 
 import ninja_syntax
 
@@ -114,18 +114,18 @@ def volumes() -> Iterable[str]:
     return [x[0] for x in BOOK]
 
 
-def available_images():
-    images = set()
+def available_images() -> Dict[Tuple[str, str], str]:
+    images = dict()
 
     for volume in volumes():
         for file in os.listdir("{}/images".format(volume)):
-            root = os.path.splitext(file)[0]
+            root, fmt = os.path.splitext(file)
             name = (volume, root)
 
             if name in images:
                 raise Exception("duplicate image: {}".format(name))
 
-            images.add(name)
+            images[name] = fmt[1:]
 
     return images
 
@@ -149,26 +149,48 @@ def required_images():
     return wanted
 
 
-def main():
-    n = ninja_syntax.Writer(open('.build.ninja~', 'w'))
-
-    n.rule('gen', ['./gen.py'])
-    n.build('build.ninja', 'gen', './gen.py', variables={'generator': 1})
+def images(n):
+    n.rule('cp', '$cp $in $out')
+    n.rule('inkscape', '$inkscape $in --export-plain-svg=$out')
 
     av = available_images()
     req = set(required_images())
-
-    if not av.issuperset(req):
+    if not set(av.keys()).issuperset(req):
         print('Some images not available:')
         for img in req:
             if img not in av:
                 print(' * ' + img)
         sys.exit(2)
-
     if av != req:
         print('Some images not used:')
-        for img in sorted(av - req):
+        for img in sorted(set(av.keys()) - req):
             print(img)
+    for volume, root in sorted(req):
+        def dest(new_fmt: str) -> str:
+            return '$outdir/{}/{}.{}'.format(volume, root, new_fmt)
+
+        fmt = av[(volume, root)]
+        src = '{}/images/{}.{}'.format(volume, root, fmt)
+
+        if fmt in {'jpg', 'png'}:
+            n.build(dest(fmt), 'cp', inputs=[src])
+        elif fmt == 'eps':
+            n.build(dest('svg'), 'inkscape', inputs=[src])
+        else:
+            raise Exception('Unsupported format: ' + fmt)
+
+
+def main():
+    n = ninja_syntax.Writer(open('.build.ninja~', 'w'))
+
+    n.variable('outdir', 'build')
+    n.variable('cp', 'cp')
+    n.variable('inkscape', 'inkscape')
+
+    n.rule('gen', ['./gen.py'])
+    n.build('build.ninja', 'gen', './gen.py', variables={'generator': 1})
+
+    images(n)
 
     n.close()
     os.rename('.build.ninja~', 'build.ninja')

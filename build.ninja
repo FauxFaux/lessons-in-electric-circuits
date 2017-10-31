@@ -1,4 +1,0 @@
-rule gen
-  command = ./gen.py
-build build.ninja: gen ./gen.py
-  generator = 1
