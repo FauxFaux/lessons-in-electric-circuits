@@ -1,9 +1,9 @@
-AC/*.html
-DC/*.html
-Devel/*.html
-Digital/*.html
-Exper/*.html
-Ref/*.html
-Semi/*.html
+AC/AC_*.html
+DC/DC_*.html
+Devel/Devel_*.html
+Digital/Digital_*.html
+Exper/Exper_*.html
+Ref/Ref_*.html
+Semi/Semi_*.html
 .idea/
 *.iml
