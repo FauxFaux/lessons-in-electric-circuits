@@ -785,7 +785,7 @@ The above drawing is representative of an actual hybrid stepper motor. However, 
 
 <item>Enough torque applied to the shaft to overcome the hold-in torque would move the rotor by one tooth.</item>
 <item>If the polarity of <phi>-1 were reversed, the rotor would move by one-half tooth, direction unknown. The alignment would be south stator top to north rotor bottom, north stator bottom to south rotor.</item>
-<item>The <phi>-2 stator teeth are not aligned with the rotor teeth when <phi>-1 is energized. In fact, the <phi>-2 stator teeth are offset by one-quarter tooth. This will allow for rotation by that amount if <phi>-1 is de-energized and <phi>-2 energized. Polarity of <phi>-1 and <phi-2> drive determines direction of rotation.</item>
+<item>The <phi>-2 stator teeth are not aligned with the rotor teeth when <phi>-1 is energized. In fact, the <phi>-2 stator teeth are offset by one-quarter tooth. This will allow for rotation by that amount if <phi>-1 is de-energized and <phi>-2 energized. Polarity of <phi>-1 and <phi>-2 drive determines direction of rotation.</item>
 </itemize>
 
 

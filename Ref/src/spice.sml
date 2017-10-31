@@ -551,7 +551,7 @@ Example:       .model mod2 d vj=0.65 rs=1.3
 <sp>
 </literal>
 
-<hypertarget>diodeparameter</hypertarget>
+<hypertarget>diodeparameter[]</hypertarget>
 
 <para>
 <italic>Parameter definitions:</italic>
@@ -1259,7 +1259,7 @@ Example 1:     .ac lin 1 1000 1000
 </literal>
 
 <para>
-<bold>Comments:</bold>  The [curve] field can be "lin" (linear), "dec" (decade), or "oct" (octave), specifying the (non)linearity of the frequency sweep.  <points> specifies how many points within the frequency sweep to perform analyses at (for decade sweep, the number of points per decade; for octave, the number of points per octave).  The [start] and [final] fields specify the starting and ending frequencies of the sweep, respectively.  One final note: the "start" value cannot be zero!
+<bold>Comments:</bold>  The [curve] field can be "lin" (linear), "dec" (decade), or "oct" (octave), specifying the (non)linearity of the frequency sweep.  [points] specifies how many points within the frequency sweep to perform analyses at (for decade sweep, the number of points per decade; for octave, the number of points per octave).  The [start] and [final] fields specify the starting and ending frequencies of the sweep, respectively.  One final note: the "start" value cannot be zero!
 </para>
 
 <bigspace>

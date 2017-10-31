@@ -497,7 +497,8 @@ The circuit in Figure<ref>03441.png above</ref> could represent a DC power suppl
 
 
 <para>
-The peak detector may be combined with other components to build a <hyperlink>CrystalRadio[crystal radio][SEMI_9.html]</hyperlink> <pageref>03442.png</pageref>.
+The peak detector may be combined with other components to build a <hyperlink>CrystalRadio[crystal radio][SEMI_9.html]</hyperlink>
+<ref>03442.png</ref>.
 </para>
 
 
@@ -941,7 +942,7 @@ The netlist is in Figure<ref>23032.png below</ref>.
 <image>03286.png<caption>Voltage quadrupler, composed of two doublers stacked  in series, with output at node 2.</caption></image>
 
 <para>
-The waveforms of the quadrupler are shown in Figure<ref>23032.png below</ref>. Two DC outputs are available: v(3), the doubler output, and v(2) the quadrupler output. Some of the intermediate voltages at clampers illustrate that the input sinewave (not shown), which swings by <plusminus)>5 V, is successively clamped at higher levels: at v(5), v(4) and v(1). Strictly v(4) is not a clamper output. It is simply the AC voltage source in series with the v(3) the doubler output. None the less, v(1) is a clamped version of v(4)
+The waveforms of the quadrupler are shown in Figure<ref>23032.png below</ref>. Two DC outputs are available: v(3), the doubler output, and v(2) the quadrupler output. Some of the intermediate voltages at clampers illustrate that the input sinewave (not shown), which swings by <plusminus>5 V, is successively clamped at higher levels: at v(5), v(4) and v(1). Strictly v(4) is not a clamper output. It is simply the AC voltage source in series with the v(3) the doubler output. None the less, v(1) is a clamped version of v(4)
 </para>
 
 <figure>
@@ -2188,7 +2189,7 @@ PIN diodes serve as variable resistors when the forward bias is varied. One such
 
 
 <para>
-<The <italic>IMPact Avalanche Transit Time</italic> diode is a high power radio frequency (RF) generator operating from 3 to 100 gHz. IMPATT diodes are fabricated from silicon, gallium arsenide, or silicon carbide.
+The <italic>IMPact Avalanche Transit Time</italic> diode is a high power radio frequency (RF) generator operating from 3 to 100 gHz. IMPATT diodes are fabricated from silicon, gallium arsenide, or silicon carbide.
 </para>
 
 
