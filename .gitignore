@@ -7,3 +7,5 @@ Ref/Ref_*.html
 Semi/Semi_*.html
 .idea/
 *.iml
+__pycache__
+.ninja_*
