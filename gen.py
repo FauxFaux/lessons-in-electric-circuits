@@ -2,6 +2,7 @@
 import os
 import os.path
 import re
+import sys
 from typing import Iterable, Tuple, Iterator
 
 import ninja_syntax
@@ -106,7 +107,7 @@ BOOK = (
     ]),
 )
 
-IMAGE = re.compile('<image>([a-z0-9]+)\.(?:png|jpg|eps|gif)<')
+IMAGE = re.compile('<image(?:nf)?>([a-z0-9]+)\.(?:png|jpg|eps|gif)<')
 
 
 def volumes() -> Iterable[str]:
@@ -142,7 +143,10 @@ def required_images():
 
     for volume, chapters in BOOK:
         for chapter in chapters:
-            wanted.update(image_links('{}/src/{}.sml'.format(volume, chapter)))
+            for link in image_links('{}/src/{}.sml'.format(volume, chapter)):
+                wanted.add((volume, link))
+
+    return wanted
 
 
 def main():
@@ -151,8 +155,20 @@ def main():
     n.rule('gen', ['./gen.py'])
     n.build('build.ninja', 'gen', './gen.py', variables={'generator': 1})
 
-    available_images()
-    required_images()
+    av = available_images()
+    req = set(required_images())
+
+    if not av.issuperset(req):
+        print('Some images not available:')
+        for img in req:
+            if img not in av:
+                print(' * ' + img)
+        sys.exit(2)
+
+    if av != req:
+        print('Some images not used:')
+        for img in sorted(av - req):
+            print(img)
 
     n.close()
     os.rename('.build.ninja~', 'build.ninja')
