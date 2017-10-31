@@ -197,6 +197,13 @@ def main():
 
     images(n)
 
+    n.rule('sml2html', ['./gen_html.py', '$in', '$out'])
+    for volume, chapters in BOOK:
+        for i, chapter in enumerate(chapters):
+            n.build('$outdir/{}/{}_{}.html'.format(volume, volume, i + 1),
+                    'sml2html',
+                    '{}/src/{}.sml'.format(volume, chapter))
+
     n.close()
     os.rename('.build.ninja~', 'build.ninja')
 
