@@ -134,11 +134,11 @@ The same schematic redrawn to reflect this convention looks something like this:
 </para>
 
 <para>
-The 555 timer is probably one of the more versatile "black box" chips. Its 3 resistor voltage divider, 2 comparators, and built in set reset flip flop are wired to form a Schmitt Trigger in this design. It’s interesting to note that the configuration isn’t even close to the op amp configuration shown elsewhere, but the end result is identical.
+The 555 timer is probably one of the more versatile "black box" chips. Its 3 resistor voltage divider, 2 comparators, and built in set reset flip flop are wired to form a Schmitt Trigger in this design. ItÂ’s interesting to note that the configuration isnÂ’t even close to the op amp configuration shown elsewhere, but the end result is identical.
 </para>
 
 <para>
-Try adjusting the potentiometer until the lights flip states, then measure the voltage. Compare this voltage to the power supply voltage. Adjust the potentiometer the other way until the LED’s flip states again, and measure the voltage. How close to the 1/3 and 2/3 marks did you get?
+Try adjusting the potentiometer until the lights flip states, then measure the voltage. Compare this voltage to the power supply voltage. Adjust the potentiometer the other way until the LEDÂ’s flip states again, and measure the voltage. How close to the 1/3 and 2/3 marks did you get?
 </para>
 
 <para>
@@ -261,7 +261,7 @@ This is one of the most basic RC oscillators.  It is simple and very predictable
 </para>
 
 <para>
-This circuit has a lower end frequency of 0.7 Hertz, which means each LED will alternate and be lit for just under a second each.  As you turn the potentiometer counterclockwise the frequency will increase, going well into the high end audio range.  You can verify this with the Audio Detector (Vol. VI, Chapter 3, Section 12) or a piezoelectric speaker, as you continue to turn the potentiometer the pitch of the sound will rise.  You can increase the frequency 100 times by replacing the capacitor with the 1µF capacitor, which will also raise the maximum frequency well into the ultrasonic range, around 70Khz.
+This circuit has a lower end frequency of 0.7 Hertz, which means each LED will alternate and be lit for just under a second each.  As you turn the potentiometer counterclockwise the frequency will increase, going well into the high end audio range.  You can verify this with the Audio Detector (Vol. VI, Chapter 3, Section 12) or a piezoelectric speaker, as you continue to turn the potentiometer the pitch of the sound will rise.  You can increase the frequency 100 times by replacing the capacitor with the 1ÂµF capacitor, which will also raise the maximum frequency well into the ultrasonic range, around 70Khz.
 </para>
 
 <para>
@@ -324,9 +324,9 @@ The output of a 555 either goes to ground, or relatively close to the plus volta
 <item>R1,R2 - 1 K<OMEGA> 1/4W Resistors</item>
 <item>Rt - 27 K<OMEGA> 1/4W Resistor</item>
 <item>Rt - 270 K<OMEGA> 1/4W Resistor</item>
-<item>C1,C2 - 0.1 µF Capacitor (Radio Shack catalog 272-1069 or equivalent)</item>
-<item>Ct - 10 µF Capacitor (Radio Shack catalog 272-1025 or equivalent)</item>
-<item>Ct - 100 µF Capacitor (Radio Shack catalog 272-1028 or equivalent)</item>
+<item>C1,C2 - 0.1 ÂµF Capacitor (Radio Shack catalog 272-1069 or equivalent)</item>
+<item>Ct - 10 ÂµF Capacitor (Radio Shack catalog 272-1025 or equivalent)</item>
+<item>Ct - 100 ÂµF Capacitor (Radio Shack catalog 272-1028 or equivalent)</item>
 </itemize>
 
 
@@ -405,7 +405,7 @@ It is an illegal condition for the input to stay low for this design past timeou
 </para>
  
 <para>
-Rt and Ct were selected for 3 seconds timing duration. You can verify this with a watch, 3 seconds is long enough that we slow humans can actually measure it. Try swapping Rt and Ct with the 27 KO resistor and the 100 µF capacitor. Since the answer to the formula is the same there should be no difference in how it operates. Next try swapping Rt with the 270 KO resistor, since the RC time constant is now 10 times greater you should get close to 30 seconds. The resistor and capacitor are probably 5% and 20% tolerance respectively, so the calculated times you measure can vary as much as 25%, though it will usually be much closer.
+Rt and Ct were selected for 3 seconds timing duration. You can verify this with a watch, 3 seconds is long enough that we slow humans can actually measure it. Try swapping Rt and Ct with the 27 KO resistor and the 100 ÂµF capacitor. Since the answer to the formula is the same there should be no difference in how it operates. Next try swapping Rt with the 270 KO resistor, since the RC time constant is now 10 times greater you should get close to 30 seconds. The resistor and capacitor are probably 5% and 20% tolerance respectively, so the calculated times you measure can vary as much as 25%, though it will usually be much closer.
 </para>
  
 <para>
@@ -516,8 +516,8 @@ Figure<ref>45019.png 5</ref> shows the circuit after it has settled down, which 
 <item>D1 - Red light-emitting diode (Radio Shack catalog # 276-041 or equivalent)</item>
 <item>R1 - 1.5 M<OMEGA> 1/4W 5% Resistor</item>
 <item>R2 - 47 K<OMEGA> 1/4W 5% Resistor</item>
-<item>C1 - 1 µF Tantalum Capacitor (Radio Shack catalog 272-1025 or equivalent)</item>
-<item>C2 - 100 µF Electrolytic Capacitor (Radio Shack catalog 272-1028 or equivalent)</item>
+<item>C1 - 1 ÂµF Tantalum Capacitor (Radio Shack catalog 272-1025 or equivalent)</item>
+<item>C2 - 100 ÂµF Electrolytic Capacitor (Radio Shack catalog 272-1028 or equivalent)</item>
 </itemize>
 
 
@@ -591,7 +591,7 @@ This design turns a deficit into an advantage as the current drive only gets wor
 </para>
 
 <para>
-It is possible to run into problems with electrolytic capacitors when dealing with very low currents (2µa in this case) in that the leakage can be excessive, a borderline failure condition.  If your experiment seems to do this it might be fixed by charging across the battery, then discharging the capacitor C1 across any conductor several times.
+It is possible to run into problems with electrolytic capacitors when dealing with very low currents (2Âµa in this case) in that the leakage can be excessive, a borderline failure condition.  If your experiment seems to do this it might be fixed by charging across the battery, then discharging the capacitor C1 across any conductor several times.
 </para>
 
 <para>
@@ -667,9 +667,9 @@ In running this experiment there was a feedback mechanism I hadn't anticipated. 
 <item>R3 - 2.2 K<OMEGA> 1/4W 5% Resistor</item>
 <item>R4 - 620 <OMEGA> 1/4W 5% Resistor</item>
 <item>R5 - 82 <OMEGA> 1/4W 5% Resistor</item>
-<item>C1 - 1 µF Tantalum Capacitor (Radio Shack catalog 272-1025 or equivalent)</item>
-<item>C2 - 100 µF Electrolytic Capacitor (Radio Shack catalog 272-1028 or equivalent)</item>
-<item>C3 - 470 µF Electrolytic Capacitor (Radio Shack catalog 272-1030 or equivalent)</item>
+<item>C1 - 1 ÂµF Tantalum Capacitor (Radio Shack catalog 272-1025 or equivalent)</item>
+<item>C2 - 100 ÂµF Electrolytic Capacitor (Radio Shack catalog 272-1028 or equivalent)</item>
+<item>C3 - 470 ÂµF Electrolytic Capacitor (Radio Shack catalog 272-1030 or equivalent)</item>
 </itemize>
 
 
@@ -812,10 +812,10 @@ You may notice a dim blue glow in the blue LED when it is off.  This demonstrate
 <item>R4 - 1 M<OMEGA> 1/4W 5% Resisto</item>r
 <item>R6 - 100 K<OMEGA> 1/4W 5% Resistor</item>
 <item>R7 - 1 K<OMEGA> 1/4W 5% Resistor</item>
-<item>C1 - 1 µF Tantalum Capacitor (Radio Shack catalog # 272-1025 or equivalent)</item>
+<item>C1 - 1 ÂµF Tantalum Capacitor (Radio Shack catalog # 272-1025 or equivalent)</item>
 <item>C2 - 100 pF Ceramic Disc Capacitor (Radio Shack catalog # 272-123)</item>
-<item>C3 - 100 µF Electrolytic Capacitor (Radio Shack catalog 272-1028 or equivalent)</item>
-<item>L1 - 200 µH Choke or Inductor (Exact value not critical, see end of chapter)</item>
+<item>C3 - 100 ÂµF Electrolytic Capacitor (Radio Shack catalog 272-1028 or equivalent)</item>
+<item>L1 - 200 ÂµH Choke or Inductor (Exact value not critical, see end of chapter)</item>
 </itemize>
 
 
@@ -907,7 +907,7 @@ Generally the high voltage created by inductive kickback is something to be elim
 </para>
 
 <para>
-The inductor in this circuit is probably the least critical part in the design.  The term inductor is generic, you can also find this component called a choke or a coil.  A solenoid coil would also work, since that is also a type of inductor.  So would the coil from a relay.  Of all the components I have used, this is probably the least critical I've come across.  Indeed, coils are probably the most practical component you can make yourself that exists.  I'll cover how to make a coil that will work in this design after the Theory of Operation, but the part shown on the illustration is a 200µH choke I bought from a local electronics retailer.
+The inductor in this circuit is probably the least critical part in the design.  The term inductor is generic, you can also find this component called a choke or a coil.  A solenoid coil would also work, since that is also a type of inductor.  So would the coil from a relay.  Of all the components I have used, this is probably the least critical I've come across.  Indeed, coils are probably the most practical component you can make yourself that exists.  I'll cover how to make a coil that will work in this design after the Theory of Operation, but the part shown on the illustration is a 200ÂµH choke I bought from a local electronics retailer.
 </para>
 
 <bigspace>
@@ -985,7 +985,7 @@ Here is what the one I made looked like: Figure<ref>45034.png below</ref>.</para
 <image>45034.jpg<caption></caption></image>
 
 <para>
-The connections shown are being used to measure the inductance, which worked out pretty close to 220µH.
+The connections shown are being used to measure the inductance, which worked out pretty close to 220ÂµH.
 </para>
 
 </section>
@@ -1012,8 +1012,8 @@ The connections shown are being used to measure the inductance, which worked out
 <item>R2 - 47 K<OMEGA> 1/4W 5% Resistor</item>
 <item>R3 - 2.2 K<OMEGA> 1/4W 5% Resistor</item>
 <item>R4 - 27 <OMEGA> 1/4W 5% Resistor (or test select a better value)</item>
-<item>C1 - 1 µF Tantalum Capacitor (Radio Shack catalog 272-1025 or equivalent)</item>
-<item>C2 - 100 µF Electrolytic Capacitor (Radio Shack catalog 272-1028 or equivalent)</item>
+<item>C1 - 1 ÂµF Tantalum Capacitor (Radio Shack catalog 272-1025 or equivalent)</item>
+<item>C2 - 100 ÂµF Electrolytic Capacitor (Radio Shack catalog 272-1028 or equivalent)</item>
 </itemize>
 
 

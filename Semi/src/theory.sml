@@ -1664,7 +1664,7 @@ Contributors to this chapter are listed in chronological order of their contribu
 
 
 
-<comment>the Flatté Flatte and Mössbauer Mossbauer (3) biblio references cause trouble at ibiblio</comment>
+<comment>the FlattÃ© Flatte and MÃ¶ssbauer Mossbauer (3) biblio references cause trouble at ibiblio</comment>
 
 
 </section>
