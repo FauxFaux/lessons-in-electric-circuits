@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 
-import subprocess
+import argparse
 
-import sys
+import subprocess
+import tempfile
+
+import time
 
 HEAD = """
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"> 
@@ -10,7 +13,7 @@ HEAD = """
 
 <head>
 
-<title>Lessons In Electric Circuits -- Volume {} - Chapter {}</title>
+<title>Lessons In Electric Circuits -- Volume {0} - Chapter {1}</title>
   <meta name="description" content="Ohm's Law">
   <meta name="keywords" content="book, ebook, textbook, tutorial, copyleft, copylefted,
   free, educational, free book, free ebook, free textbook, free download, copyleft book,
@@ -20,28 +23,77 @@ HEAD = """
   voltage drop, spice, spice2g6, spice tutorial, using spice"> 
 </head>
 
-<body>
-
 <body bgColor=white>
 
+{2}
+
+<h1>Lessons In Electric Circuits -- Volume {0}</h1>
+<h1>Chapter {1}</h1>
+"""
+
+LINKS = """
 {}
-<a href="index.html"><img src="contents.jpg alt="Contents"></a>
+<a href="index.html"><img src="../shared/contents.svg" alt="Contents"></a>
+{}
+"""
+
+FOOT = """
+<hr>
+
+<p>
+<i>Lessons In Electric Circuits</i> copyright (C) 2000-2017 Tony R. Kuphaldt,
+under the terms and conditions of the <a href="{}_A3.html">Design Science License</a>.
+</p>
+
 {}
 
-<h1>Lessons In Electric Circuits -- Volume {}</h1>
-<h1>Chapter {}</h1>
+</body>
+</html>
 """
 
 
 def main():
-    inp = sys.argv[1]
-    output = sys.argv[2]
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--src', nargs=1, required=True)
+    parser.add_argument('--out', nargs=1, required=True)
+    parser.add_argument('--prev', nargs=1)
+    parser.add_argument('--next', nargs=1)
+    parser.add_argument('--volume', nargs=1, required=True)
+    parser.add_argument('--chapter', nargs=1, required=True)
+    args = parser.parse_args()
 
-    raw_html = subprocess.check_output(['sed', '-f', 'bin/sml2html.sed', inp])
+    inp = args.src[0]
+    output = args.out[0]
+    volume = args.volume[0]
+    chapter = args.chapter[0]
 
-    with open(output, 'wb') as f:
-        f.write(raw_html)
+    raw_html = subprocess.check_output(['sed', '-f', 'bin/sml2html.sed', inp]).decode('utf-8')
 
+    prev = ''
+    next = ''
+
+    if args.prev:
+        prev = '<a href="{}"><img src="../shared/previous.svg" alt="Previous"/></a>'.format(args.prev[0])
+
+    if args.next:
+        next = '<a href="{}"><img src="../shared/next.svg" alt="Next"/></a>'.format(args.next[0])
+
+    links = LINKS.format(prev, next)
+
+    with tempfile.NamedTemporaryFile(mode='w') as t:
+        t.write(HEAD.format(
+            volume,
+            chapter,
+            links
+        ))
+        t.write(raw_html)
+        t.write(FOOT.format(volume, links))
+        t.flush()
+
+        ret = subprocess.call(['tidy', '-indent', '-clean', '-q', '-output', output, t.name])
+
+        # 1: warnings. Sigh.
+        assert ret in (0, 1)
 
 if __name__ == '__main__':
     main()

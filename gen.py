@@ -179,6 +179,11 @@ def images(n):
         else:
             raise Exception('Unsupported format: ' + fmt)
 
+    for f in ('contents', 'pdf', 'ps', 'src1', 'src2'):
+        n.build('$outdir/shared/{}.svg'.format(f), 'inkscape', 'shared-images/{}.eps'.format(f))
+
+    for f in ('next', 'previous'):
+        n.build('$outdir/shared/{}.svg'.format(f), 'inkscape', 'shared-images/{}.svg'.format(f))
 
 def main():
     n = ninja_syntax.Writer(open('.build.ninja~', 'w'))
@@ -197,12 +202,31 @@ def main():
 
     images(n)
 
-    n.rule('sml2html', ['./gen_html.py', '$in', '$out'])
+    n.rule('sml2html', ['./gen_html.py', '--src=$in', '--out=$out',
+                        '--volume=$volume', '--chapter=$chapter',
+                        '--next=$next', '--prev=$prev'])
     for volume, chapters in BOOK:
         for i, chapter in enumerate(chapters):
+            if i == 0:
+                prev_link = 'index.html'
+            else:
+                prev_link = '{}_{}.html'.format(volume, i + 1 - 1)
+
+            if i == len(chapters):
+                next_link = 'index.html'
+            else:
+                next_link = '{}_{}.html'.format(volume, i + 1 + 1)
+
             n.build('$outdir/{}/{}_{}.html'.format(volume, volume, i + 1),
                     'sml2html',
-                    '{}/src/{}.sml'.format(volume, chapter))
+                    inputs='{}/src/{}.sml'.format(volume, chapter),
+                    implicit='gen_html.py',
+                    variables={
+                        'volume': volume,
+                        'chapter': (i + 1),
+                        'next': next_link,
+                        'prev': prev_link,
+                    })
 
     n.close()
     os.rename('.build.ninja~', 'build.ninja')

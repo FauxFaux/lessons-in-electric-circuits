@@ -2759,7 +2759,7 @@ The calculated R<subscript>B</subscript> = 39k is a standard value resistor. No 
 <image>13072.png</image>
 
 <para>
-The performance of the emitter-bias circuit with a 910<Onega> emitter resistor is much improved. See Table <ref>emb3.tbl below</ref>.
+The performance of the emitter-bias circuit with a 910<OMEGA> emitter resistor is much improved. See Table <ref>emb3.tbl below</ref>.
 </para>
 
 
