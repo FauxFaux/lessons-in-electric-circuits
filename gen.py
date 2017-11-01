@@ -152,6 +152,7 @@ def required_images():
 def images(n):
     n.rule('cp', '$cp $in $out')
     n.rule('inkscape', '$inkscape $in --export-plain-svg=$out')
+    n.rule('mogrify-png', 'convert -density 160 $in $out && optipng -quiet $out')
 
     av = available_images()
     req = set(required_images())
@@ -175,7 +176,8 @@ def images(n):
         if fmt in {'jpg', 'png'}:
             n.build(dest(fmt), 'cp', inputs=[src])
         elif fmt == 'eps':
-            n.build(dest('svg'), 'inkscape', inputs=[src])
+            # n.build(dest('svg'), 'inkscape', inputs=[src])
+            n.build(dest('png'), 'mogrify-png', inputs=[src])
         else:
             raise Exception('Unsupported format: ' + fmt)
 
