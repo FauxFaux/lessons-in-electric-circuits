@@ -152,7 +152,8 @@ def required_images():
 def images(n):
     n.rule('cp', '$cp $in $out')
     n.rule('inkscape', '$inkscape $in --export-plain-svg=$out')
-    n.rule('mogrify-png', 'convert -density 160 $in $out && optipng -quiet $out')
+    n.rule('mogrify-png', 'convert -density 160 $in $out')
+    n.rule('optipng', 'optipng -clobber -quiet $in -out $out')
 
     av = available_images()
     req = set(required_images())
@@ -168,7 +169,13 @@ def images(n):
             print(img)
     for volume, root in sorted(req):
         def dest(new_fmt: str) -> str:
-            return '$outdir/{}/{}.{}'.format(volume, root, new_fmt)
+            return '$html/{}/{}.{}'.format(volume, root, new_fmt)
+
+        def tmp(new_fmt: str) -> str:
+            return '$tmp/{}/{}.{}'.format(volume, root, new_fmt)
+
+        def tmp_raw(new_fmt: str) -> str:
+            return '$tmp/{}/raw-{}.{}'.format(volume, root, new_fmt)
 
         fmt = av[(volume, root)]
         src = '{}/images/{}.{}'.format(volume, root, fmt)
@@ -177,20 +184,24 @@ def images(n):
             n.build(dest(fmt), 'cp', inputs=[src])
         elif fmt == 'eps':
             # n.build(dest('svg'), 'inkscape', inputs=[src])
-            n.build(dest('png'), 'mogrify-png', inputs=[src])
+            n.build(tmp_raw('png'), 'mogrify-png', inputs=[src])
+            n.build(tmp('png'), 'optipng', inputs=[tmp_raw('png')])
+            n.build(dest('png'), 'cp', tmp('png'))
         else:
             raise Exception('Unsupported format: ' + fmt)
 
     for f in ('contents', 'pdf', 'ps', 'src1', 'src2'):
-        n.build('$outdir/shared/{}.png'.format(f), 'mogrify-png', 'shared-images/{}.eps'.format(f))
+        n.build('$html/shared/{}.png'.format(f), 'mogrify-png', 'shared-images/{}.eps'.format(f))
 
     for f in ('next', 'previous'):
-        n.build('$outdir/shared/{}.png'.format(f), 'mogrify-png', 'shared-images/{}.svg'.format(f))
+        n.build('$html/shared/{}.png'.format(f), 'mogrify-png', 'shared-images/{}.svg'.format(f))
 
 def main():
     n = ninja_syntax.Writer(open('.build.ninja~', 'w'))
 
     n.variable('outdir', 'build')
+    n.variable('html', '$outdir/html')
+    n.variable('tmp', '$outdir/tmp')
     n.variable('cp', 'cp')
     n.variable('inkscape', 'inkscape')
     n.variable('tidy', 'tidy')
@@ -200,7 +211,7 @@ def main():
 
     n.rule('tidy', '$tidy -indent -clean -q -output $out $in || [ $$? -ne 2 ]')
     for volume in volumes():
-        n.build('$outdir/{}/index.html'.format(volume), 'tidy', '{}/index.html'.format(volume))
+        n.build('$html/{}/index.html'.format(volume), 'tidy', '{}/index.html'.format(volume))
 
     images(n)
 
@@ -219,7 +230,7 @@ def main():
             else:
                 next_link = '{}_{}.html'.format(volume, i + 1 + 1)
 
-            n.build('$outdir/{}/{}_{}.html'.format(volume, volume, i + 1),
+            n.build('$html/{}/{}_{}.html'.format(volume, volume, i + 1),
                     'sml2html',
                     inputs='{}/src/{}.sml'.format(volume, chapter),
                     implicit='gen_html.py',
@@ -245,7 +256,7 @@ def main():
         'vim1.png',
         'xctitle.png',
     ):
-        n.build('$outdir/' + f, 'cp', 'Home/' + f)
+        n.build('$html/' + f, 'cp', 'Home/' + f)
 
     n.close()
     os.rename('.build.ninja~', 'build.ninja')
