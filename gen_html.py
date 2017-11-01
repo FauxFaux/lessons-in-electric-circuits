@@ -33,7 +33,7 @@ HEAD = """
 
 LINKS = """
 {}
-<a href="index.html"><img src="../shared/contents.svg" alt="Contents"></a>
+<a href="index.html"><img src="../shared/contents.png" alt="Contents"></a>
 {}
 """
 
@@ -73,10 +73,10 @@ def main():
     next = ''
 
     if args.prev:
-        prev = '<a href="{}"><img src="../shared/previous.svg" alt="Previous"/></a>'.format(args.prev[0])
+        prev = '<a href="{}"><img src="../shared/previous.png" alt="Previous"/></a>'.format(args.prev[0])
 
     if args.next:
-        next = '<a href="{}"><img src="../shared/next.svg" alt="Next"/></a>'.format(args.next[0])
+        next = '<a href="{}"><img src="../shared/next.png" alt="Next"/></a>'.format(args.next[0])
 
     links = LINKS.format(prev, next)
 

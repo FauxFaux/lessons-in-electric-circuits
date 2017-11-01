@@ -858,12 +858,12 @@ The following markup provides an external  link to a URL in both html and pdf do
 </para>
 <literal>
 Go to 
-<lt>url<gt>http:www.ibiblio.org/obp/electricCircuits/index.htm[Lessons in Electric Circuits]<lt>/url<gt>
+<lt>url<gt>http:www.ibiblio.org/obp/electricCircuits/[Lessons in Electric Circuits]<lt>/url<gt>
  to learn about electricity.
 </literal>
 <para>
 Go to 
-<url>http:www.ibiblio.org/obp/electricCircuits/index.htm[Lessons in Electric Circuits]</url>
+<url>http:www.ibiblio.org/obp/electricCircuits/[Lessons in Electric Circuits]</url>
  to learn about electricity.
 </para>
 

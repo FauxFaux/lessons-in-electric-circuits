@@ -171,7 +171,7 @@ liechtml :
              Ref/*.htm* Ref/*.jpg Ref/*.png \
              Exper/*.htm* Exper/*.jpg Exper/*.png \
              Devel/*.htm* Devel/*.jpg Devel/*.png \
-             index.htm *.jpg *.png
+             index.html *.jpg *.png
 	gzip -f liechtml.tar
 
 # The 'liechtml' option pieces together only those files 

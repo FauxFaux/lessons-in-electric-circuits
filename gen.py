@@ -182,10 +182,10 @@ def images(n):
             raise Exception('Unsupported format: ' + fmt)
 
     for f in ('contents', 'pdf', 'ps', 'src1', 'src2'):
-        n.build('$outdir/shared/{}.svg'.format(f), 'inkscape', 'shared-images/{}.eps'.format(f))
+        n.build('$outdir/shared/{}.png'.format(f), 'mogrify-png', 'shared-images/{}.eps'.format(f))
 
     for f in ('next', 'previous'):
-        n.build('$outdir/shared/{}.svg'.format(f), 'inkscape', 'shared-images/{}.svg'.format(f))
+        n.build('$outdir/shared/{}.png'.format(f), 'mogrify-png', 'shared-images/{}.svg'.format(f))
 
 def main():
     n = ninja_syntax.Writer(open('.build.ninja~', 'w'))
@@ -229,6 +229,23 @@ def main():
                         'next': next_link,
                         'prev': prev_link,
                     })
+
+    for f in (
+        'index.html',
+        'log.html',
+        'ac.jpg',
+        'dc.jpg',
+        'digi.jpg',
+        'exp.jpg',
+        'gnu.jpg',
+        'ref.jpg',
+        'semi.jpg',
+        'thegimp.png',
+        'tux.png',
+        'vim1.png',
+        'xctitle.png',
+    ):
+        n.build('$outdir/' + f, 'cp', 'Home/' + f)
 
     n.close()
     os.rename('.build.ninja~', 'build.ninja')
